@@ -79,6 +79,10 @@
                 throw new Exception($e->getMessage());
             }
 
+            if($res->getStatusCode() != 200) {
+                throw new Exception("Erreur lors de la récupération des contenus");
+            }
+
             $body = json_decode($res->getBody()->getContents());
 
             if(json_last_error() !== JSON_ERROR_NONE || !$body->success) {
