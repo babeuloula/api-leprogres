@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.2
+
+- Fix Status code
+
 ## v1.1.1
 
 - Modification de la gestion des erreurs 404, 405 et 500

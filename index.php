@@ -36,7 +36,7 @@
             $lastContents = $api->getLastContents($page, $perPage, $contentType);
             return $response->withJson($lastContents);
         } catch (Exception $e) {
-            return $response->withJson($e->getMessage(), $e->getCode());
+            return $response->withJson($e->getMessage(), ($e->getCode() !== 0) ? $e->getCode() : 500);
         }
     });
 
@@ -56,7 +56,7 @@
             $oneContent = $api->getOneContent($cmsUrl);
             return $response->withJson($oneContent);
         } catch (Exception $e) {
-            return $response->withJson($e->getMessage(), $e->getCode());
+            return $response->withJson($e->getMessage(), ($e->getCode() !== 0) ? $e->getCode() : 500);
         }
     });
 
