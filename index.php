@@ -2,6 +2,7 @@
 
     use LeProgres\Api\Api;
     use Slim\App;
+    use Slim\Container;
     use Slim\Exception\MethodNotAllowedException;
     use Slim\Exception\NotFoundException;
     use Slim\Http\Request;
@@ -14,7 +15,7 @@
     $app = new App($config);
 
 
-    $app->get('/lastContents', function (Request $request, Response $response, array $args) {
+    $app->get('/lastContents', function (Request $request, Response $response, array $args) : Response {
         $get = $request->getParams();
 
         $page = (isset($get['page'])) ? $get['page'] : 1;
@@ -40,7 +41,7 @@
     });
 
 
-    $app->get('/oneContent', function(Request $request, Response $response, array $args) {
+    $app->get('/oneContent', function(Request $request, Response $response, array $args) : Response {
         $get = $request->getParams();
 
         $cmsUrl = (isset($get['cmsUrl'])) ? $get['cmsUrl'] : null;
@@ -63,16 +64,28 @@
     $container = $app->getContainer();
 
 
+    // Gestion des erreurs Slim et PHP
+    $container['errorHandler'] = function (Container $c) : callable {
+        return function (Request $request, Response $response, Exception $exception) use ($c) : Response {
+            return $response->withJson($exception->getMessage(), 500);
+        };
+    };
+    $container['phpErrorHandler'] = function (Container $c) : callable  {
+        return function (Request $request, Response $response, Error $error) use ($c) : Response {
+            return $response->withJson($error->getMessage(), 500);
+        };
+    };
+
     // Gestion des 404
-    $container['notFoundHandler'] = function ($c) {
-        return function (Request $request, Response $response) use ($c) {
+    $container['notFoundHandler'] = function (Container $c) : callable  {
+        return function (Request $request, Response $response) use ($c) : Response {
             return $response->withJson("Not found", 404);
         };
     };
     // Gestion des 405
-    $container['notAllowedHandler'] = function ($c) {
-        return function (Request $request, Response $response) use ($c) {
-            return $response->withJson("Method not allowed", 405);
+    $container['notAllowedHandler'] = function (Container $c) : callable  {
+        return function (Request $request, Response $response, array $allowMethods) use ($c) : Response {
+            return $response->withJson("Method not allowed. Allowed methods:" . join(", ", $allowMethods), 405);
         };
     };
 

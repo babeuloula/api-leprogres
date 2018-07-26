@@ -2,6 +2,6 @@
 
     return [
         'settings' => [
-            'displayErrorDetails' => true,
+            'displayErrorDetails' => false,
         ]
     ];

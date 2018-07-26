@@ -2,7 +2,7 @@
 
 ## v1.1.1
 
-- Modification de la gestion des erreurs 404 et 405
+- Modification de la gestion des erreurs 404, 405 et 500
 
 ## v1.1
 
