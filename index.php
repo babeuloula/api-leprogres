@@ -13,9 +13,6 @@
 
     $app = new App($config);
 
-    $app->get('/', function (Request $request, Response $response, array $args) {
-        return $response->withJson([], 404);
-    });
 
     $app->get('/lastContents', function (Request $request, Response $response, array $args) {
         $get = $request->getParams();
@@ -63,15 +60,21 @@
     });
 
 
-    try {
-        $app->run();
-    } catch (MethodNotAllowedException $e) {
-        $response = new Response();
-        return $response->withJson(["MethodNotAllowedException"], 405);
-    } catch (NotFoundException $e) {
-        $response = new Response();
-        return $response->withJson(["NotFoundException"], 404);
-    } catch (Exception $e) {
-        $response = new Response();
-        return $response->withJson(["Exception"], 500);
-    }
+    $container = $app->getContainer();
+
+
+    // Gestion des 404
+    $container['notFoundHandler'] = function ($c) {
+        return function (Request $request, Response $response) use ($c) {
+            return $response->withJson("Not found", 404);
+        };
+    };
+    // Gestion des 405
+    $container['notAllowedHandler'] = function ($c) {
+        return function (Request $request, Response $response) use ($c) {
+            return $response->withJson("Method not allowed", 405);
+        };
+    };
+
+
+    $app->run();

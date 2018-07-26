@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.1
+
+- Modification de la gestion des erreurs 404 et 405
+
 ## v1.1
 
 - Mega refactoring du code et séparation dans plusieurs classes
