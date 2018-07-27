@@ -8,9 +8,9 @@
     use Slim\Http\Request;
     use Slim\Http\Response;
 
-    require 'vendor/autoload.php';
+    require '../vendor/autoload.php';
 
-    $config = require('config.php');
+    $config = require('../config.php');
 
     $app = new App($config);
 

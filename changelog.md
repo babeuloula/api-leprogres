@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.1.3
+
+- Déplacement des fichiers `index.php` et `.htaccess` dans le dossier `public` 
+
 ## v1.1.2
 
 - Fix Status code
