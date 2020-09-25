@@ -12,11 +12,11 @@
          * Parse les retours de l'API officielle en quelque chose de plus mieux bien
          *
          * @param Object $body
-         * @param String $type
+         * @param string $type
          *
          * @return array
          */
-        public function parse (Object $body, String $type) : array {
+        public function parse (Object $body, string $type) : array {
             return $this->$type($body->result);
         }
 
@@ -76,6 +76,10 @@
 
             switch ($result->ContentType) {
                 case "RichContent":
+                    if (false === \is_array($result->Details->Components)) {
+                        break;
+                    }
+
                     foreach ($result->Details->Components as $component) {
                         $c = [];
 
@@ -152,6 +156,10 @@
                     break;
 
                 case "Gallery";
+                    if (false === \is_array($result->Details->Components)) {
+                        break;
+                    }
+
                     foreach ($result->Details->Images as $image) {
                         $i            = [];
                         $i['url']     = $image->Url;
@@ -191,11 +199,11 @@
         /**
          * Permet de créer une balise <iframe/>
          *
-         * @param String $url
+         * @param string $url
          *
-         * @return String
+         * @return string
          */
-        private function generateIframeTag(String $url) : String {
+        private function generateIframeTag(string $url) : string {
             return '<iframe src="' . $url . '" frameborder="0" allowfullscreen></iframe>';
         }
 
@@ -203,24 +211,24 @@
         /**
          * Permet de créer une balise <audio/>
          *
-         * @param String $url
+         * @param string $url
          *
-         * @return String
+         * @return string
          */
-        private function generateAudioTag(String $url) : String {
+        private function generateAudioTag(string $url) : string {
             return '<audio src="' . $url . '" controls=""></audio>';
         }
 
         /**
          * Permet de créer une date bien formatée
          *
-         * @param String $datetime
-         * @param String $in
-         * @param String $out
+         * @param string $datetime
+         * @param string $in
+         * @param string $out
          *
-         * @return String
+         * @return string
          */
-        private function generateDate(String $datetime, String $in = "YmdHis", String $out = "Y-m-d H:i:s") : String {
+        private function generateDate(string $datetime, string $in = "YmdHis", string $out = "Y-m-d H:i:s") : string {
             return DateTime::createFromFormat($in, $datetime)->format($out);
         }
     }

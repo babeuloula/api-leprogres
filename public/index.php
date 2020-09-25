@@ -1,14 +1,12 @@
 <?php
 
-    use LeProgres\Api\Api;
-    use Slim\App;
-    use Slim\Container;
-    use Slim\Exception\MethodNotAllowedException;
-    use Slim\Exception\NotFoundException;
-    use Slim\Http\Request;
-    use Slim\Http\Response;
+use LeProgres\Api\Api;
+use Slim\App;
+use Slim\Container;
+use Slim\Http\Request;
+use Slim\Http\Response;
 
-    require '../vendor/autoload.php';
+require '../vendor/autoload.php';
 
     $config = require('../config.php');
 
