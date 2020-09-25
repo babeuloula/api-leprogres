@@ -16,6 +16,13 @@ composer install
 php -S localhost:8000
 ```
 
+Ou avec Docker :
+
+``` shell
+git clone https://github.com/babeuloula/api-leprogres
+make install
+```
+
 ## Routes
 
 Liste des routes disponibles dans l'API.

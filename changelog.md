@@ -1,5 +1,10 @@
 # Changelog
 
+## v1.1.4
+
+- Ajout de Docker pour le dev
+- Fix dans Parser.php
+
 ## v1.1.3
 
 - Déplacement des fichiers `index.php` et `.htaccess` dans le dossier `public` 
