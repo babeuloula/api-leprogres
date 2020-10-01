@@ -1,0 +1,6 @@
+parameters:
+    level: max
+    paths:
+        - src
+    ignoreErrors:
+        - '#Access to an undefined property object::\$[0-9A-Za-z\_\-\.]#'
