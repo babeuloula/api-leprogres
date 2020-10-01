@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="." />
+    <arg name="colors" />
+    <arg name="extensions" value="php" />
+    <arg name="ignore" value="src/Kernel.php" />
+
+    <rule ref="vendor/babeuloula/phpcs/BaBeuloula/ruleset.xml">
+        <exclude name="BaBeuloula.Uses.GroupUses" />
+
+        <exclude name="PEAR.Commenting.FileComment.Missing"/>
+        <exclude name="PEAR.Commenting.FileComment.MissingAuthorTag"/>
+
+        <exclude name="BaBeuloula.CodeAnalysis.StrictTypes" />
+    </rule>
+
+    <rule ref="Generic.PHP.ForbiddenFunctions">
+        <properties>
+            <property name="forbiddenFunctions" type="array" extend="false">
+                <element key="sizeof" value="count" />
+                <element key="split" value="explode" />
+                <element key="delete" value="unset"/>
+                <element key="print" value="echo"/>
+                <element key="create_function" value="null"/>
+                <element key="error_log" value="null" />
+                <element key="print_r" value="null" />
+                <element key="var_dump" value="null" />
+                <element key="dump" value="null" />
+                <element key="dd" value="null" />
+                <element key="die" value="null" />
+                <element key="exit" value="null" />
+            </property>
+        </properties>
+    </rule>
+
+    <file>src/</file>
+
+</ruleset>
